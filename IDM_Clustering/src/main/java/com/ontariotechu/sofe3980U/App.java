@@ -2,7 +2,6 @@ package com.ontariotechu.sofe3980U;
 
 import java.io.File;
 
-import net.sf.javaml.clustering.Clusterer;
 import net.sf.javaml.clustering.KMeans;
 import net.sf.javaml.clustering.evaluation.ClusterEvaluation;
 import net.sf.javaml.clustering.evaluation.SumOfSquaredErrors;
@@ -15,13 +14,14 @@ import net.sf.javaml.tools.data.FileHandler;
 
 
 /**
- * Hello world!
+ * Main app to perform the various clustering algorithms
  *
  */
 public class App 
 {
     public static void main(String[] args) throws Exception {
 
+        // Create file handler for the iris data file
         Dataset data = FileHandler.loadDataset(new File("IDM_Clustering/src/devtools/iris.data"), 4, ",");
 
         // KMeans Clustering
@@ -45,6 +45,11 @@ public class App
 
     }
 
+    /**
+     * Method that takes clusters and prints them out alongside the cluster count
+     * 
+     * @param clusters - dataset array of clusters
+     */
     private static void PrintClusters(Dataset[] clusters){
         System.out.println("Cluster count: " + clusters.length +"\n");
 
@@ -55,6 +60,12 @@ public class App
         }
     }
 
+    /**
+     * Method to evaluate a cluster
+     * 
+     * @param clusters - dataset array of clusters
+     * @return - a string representation of the score
+     */
     private static String EvaluateCluster(Dataset[] clusters){
         ClusterEvaluation sse= new SumOfSquaredErrors();
         double score=sse.score(clusters);
